@@ -1,0 +1,20 @@
+soma = 6 + 3
+multiplicacao = 2 * 6
+
+# E
+if soma > 10 and multiplicacao > 10:
+    print("a soma e a multiplicação são maiores que dez")
+else:
+    print("a soma e a multiplicação não são maiores que dez")
+
+# OU
+if soma > 11 or multiplicacao > 11:
+    print("a soma ou multiplicação são maiores que 11")
+else:
+    print("nem a soma nem a multiplicação são maiores que 11")
+
+# NEGACAO
+if not soma > 10:
+    print("A soma não é maior que 10")
+else:
+    print("A soma é maior que 10")
