@@ -1,4 +1,5 @@
 import uuid
+import json
 
 from datetime import datetime
 
@@ -175,9 +176,10 @@ def cadastrar_visitante(visitantes):
     print(f"Data da visita: {data_visita}")
     print(f"Numero do ingresso: {numero_ingresso}")
 
-    with open("visitante.json", "w") as json_file:
-        json_file.write(visitante)
-        print("Salvo com sucesso")
+    with open("visitantes.json", "w", encoding="utf-8") as json_file:
+    json.dump(visitantes, json_file, ensure_ascii=False, indent=4)
+
+    print("Salvo com sucesso")
 
 def listar_visitantes(visitantes):
 
@@ -309,6 +311,8 @@ def remover_visitante(visitantes):
 
 def main():
 
+    visitantes = carregar_visitantes()
+
     while True:
 
         print("\n" + "=" * 60)
@@ -361,6 +365,20 @@ def main():
                 "\nOpção invalida. "
                 "Tente novamente."
             )
+
+def carregar_visitantes():
+
+    try:
+
+        with open("visitantes.json", "r", encoding="utf-8") as json_file:
+
+            visitantes = json.load(json_file)
+
+            return visitantes
+
+    except FileNotFoundError:
+
+        return []
 
 if loop == True:
     main()
