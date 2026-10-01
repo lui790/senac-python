@@ -1,11 +1,11 @@
 import uuid
-import json
-
 from datetime import datetime
 
-loop = True
+import visitanterepository
 
+loop = True
 visitantes = []
+visitantes = visitanterepository.carregar_visitantes()
 
 def solicitar_texto(mensagem):
 
@@ -167,6 +167,7 @@ def cadastrar_visitante(visitantes):
     }
 
     visitantes.append(visitante)
+    visitanterepository.salvar_visitante(visitante)
 
     print("\nVisitante cadastrado com sucesso!")
 
@@ -176,8 +177,6 @@ def cadastrar_visitante(visitantes):
     print(f"Data da visita: {data_visita}")
     print(f"Numero do ingresso: {numero_ingresso}")
 
-    with open("visitantes.json", "w", encoding="utf-8") as json_file:
-    json.dump(visitantes, json_file, ensure_ascii=False, indent=4)
 
     print("Salvo com sucesso")
 
@@ -311,8 +310,6 @@ def remover_visitante(visitantes):
 
 def main():
 
-    visitantes = carregar_visitantes()
-
     while True:
 
         print("\n" + "=" * 60)
@@ -366,19 +363,6 @@ def main():
                 "Tente novamente."
             )
 
-def carregar_visitantes():
-
-    try:
-
-        with open("visitantes.json", "r", encoding="utf-8") as json_file:
-
-            visitantes = json.load(json_file)
-
-            return visitantes
-
-    except FileNotFoundError:
-
-        return []
 
 if loop == True:
     main()
