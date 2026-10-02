@@ -1,24 +1,22 @@
 import uuid
+from visitante import Visitante
 from datetime import datetime
 
 import visitanterepository
 
-loop = True
 visitantes = []
 visitantes = visitanterepository.carregar_visitantes()
 
 def solicitar_texto(mensagem):
-
     while True:
-
         valor = input(mensagem).strip()
+
         if valor != "":
             return valor
 
         print("Este campo não pode ficar vazio.")
 
 def calcular_idade(data_nascimento):
-
     data_nascimento = datetime.strptime(
         data_nascimento,
         "%d/%m/%Y"
@@ -40,16 +38,14 @@ def calcular_idade(data_nascimento):
 
     return idade
 
-
 def cpf_cadastrado(visitantes, cpf):
-
     for visitante in visitantes:
-
         if visitante["cpf"] == cpf:
 
             return True
 
     return False
+
 
 def cadastrar_visitante(visitantes):
 
@@ -81,18 +77,15 @@ def cadastrar_visitante(visitantes):
             )
 
     while True:
-
         cpf = solicitar_texto("CPF: ")
         if cpf_cadastrado(visitantes, cpf):
 
             print(
-                "Este CPF ja esta cadastrado."
+                "Este CPF já está cadastrado."
             )
 
         else:
-
             break
-
 
     print("\nTipos de ingresso:")
     print("1 - Normal")
@@ -106,30 +99,23 @@ def cadastrar_visitante(visitantes):
         ).strip()
 
         if tipo_opcao == "1":
-
             tipo_ingresso = "Normal"
             break
-
         elif tipo_opcao == "2":
-
             tipo_ingresso = "VIP"
             break
-
         elif tipo_opcao == "3":
-
             tipo_ingresso = "Premium"
             break
 
         else:
-
             print(
                 "Opção invalida. "
                 "Escolha 1, 2 ou 3."
             )
 
-
     while True:
-
+        
         data_visita = solicitar_texto(
             "Data da visita (DD/MM/AAAA): "
         )
@@ -143,7 +129,6 @@ def cadastrar_visitante(visitantes):
             break
 
         except ValueError:
-
             print(
                 "Data invalida. "
                 "Use o formato DD/MM/AAAA."
@@ -151,23 +136,11 @@ def cadastrar_visitante(visitantes):
 
     numero_ingresso = str(uuid.uuid4())
 
-    visitante = {
-
-        "nome": nome,
-
-        "data_nascimento": data_nascimento,
-
-        "cpf": cpf,
-
-        "tipo_ingresso": tipo_ingresso,
-
-        "data_visita": data_visita,
-
-        "numero_ingresso": numero_ingresso
-    }
+    visitante = Visitante(nome, cpf, data_nascimento, tipo_ingresso, data_visita, numero_ingresso)
 
     visitantes.append(visitante)
-    visitanterepository.salvar_visitante(visitante)
+
+    visitanterepository.salvar_visitantes(visitantes)
 
     print("\nVisitante cadastrado com sucesso!")
 
@@ -175,10 +148,8 @@ def cadastrar_visitante(visitantes):
     print(f"CPF: {cpf}")
     print(f"Tipo de ingresso: {tipo_ingresso}")
     print(f"Data da visita: {data_visita}")
-    print(f"Numero do ingresso: {numero_ingresso}")
+    print(f"NÃºmero do ingresso: {numero_ingresso}")
 
-
-    print("Salvo com sucesso")
 
 def listar_visitantes(visitantes):
 
@@ -187,14 +158,11 @@ def listar_visitantes(visitantes):
     print("=" * 70)
 
     if len(visitantes) == 0:
-
         print("Nenhum visitante cadastrado.")
 
         return
 
-
     for indice, visitante in enumerate(visitantes, start=1):
-
         idade = calcular_idade(
             visitante["data_nascimento"]
         )
@@ -218,7 +186,6 @@ def consultar_visitante(visitantes):
     )
 
     for visitante in visitantes:
-
         if visitante["cpf"] == cpf:
 
             idade = calcular_idade(
@@ -251,7 +218,7 @@ def consultar_visitante(visitantes):
             )
 
             print(
-                f"Numero do ingresso: "
+                f"NÃºmero do ingresso: "
                 f"{visitante['numero_ingresso']}"
             )
 
@@ -264,7 +231,6 @@ def consultar_visitante(visitantes):
     )
 
 def remover_visitante(visitantes):
-
     print("\n" + "=" * 50)
     print("REMOVER VISITANTE")
     print("=" * 50)
@@ -274,7 +240,6 @@ def remover_visitante(visitantes):
     )
 
     for visitante in visitantes:
-
         if visitante["cpf"] == cpf:
             print(
                 f"\nVisitante encontrado: "
@@ -296,12 +261,10 @@ def remover_visitante(visitantes):
             else:
 
                 print(
-                    "\nOperação cancelada."
+                    "\nOperaÃ§Ã£o cancelada."
                 )
 
             return
-
-
 
     print(
         "\nNenhum visitante encontrado "
@@ -309,7 +272,6 @@ def remover_visitante(visitantes):
     )
 
 def main():
-
     while True:
 
         print("\n" + "=" * 60)
@@ -323,30 +285,18 @@ def main():
         print("0 - Encerrar programa")
 
         print("=" * 60)
-
-
-        opcao = input("Escolha uma opção: ").strip()
+        opcao = input(
+            "Escolha uma opÃ§Ã£o: "
+        ).strip()
 
         if opcao == "1":
-
             cadastrar_visitante(visitantes)
-
-
         elif opcao == "2":
-
             remover_visitante(visitantes)
-
-
         elif opcao == "3":
-
             listar_visitantes(visitantes)
-
-
         elif opcao == "6":
-
             consultar_visitante(visitantes)
-
-
         elif opcao == "0":
 
             print(
@@ -354,15 +304,13 @@ def main():
             )
 
             break
-
-
         else:
 
             print(
-                "\nOpção invalida. "
+                "\nOpÃ§Ã£o invÃ¡lida. "
                 "Tente novamente."
             )
 
+if __name__ == "__main__":
 
-if loop == True:
     main()
