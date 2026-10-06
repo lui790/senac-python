@@ -40,8 +40,7 @@ def calcular_idade(data_nascimento):
 
 def cpf_cadastrado(visitantes, cpf):
     for visitante in visitantes:
-        if visitante["cpf"] == cpf:
-
+        if visitante.cpf == cpf:
             return True
 
     return False
@@ -137,10 +136,9 @@ def cadastrar_visitante(visitantes):
     numero_ingresso = str(uuid.uuid4())
 
     visitante = Visitante(nome, cpf, data_nascimento, tipo_ingresso, data_visita, numero_ingresso)
-
     visitantes.append(visitante)
 
-    visitanterepository.salvar_visitantes(visitantes)
+    visitanterepository.salvar_visitante(visitantes)
 
     print("\nVisitante cadastrado com sucesso!")
 
@@ -148,7 +146,7 @@ def cadastrar_visitante(visitantes):
     print(f"CPF: {cpf}")
     print(f"Tipo de ingresso: {tipo_ingresso}")
     print(f"Data da visita: {data_visita}")
-    print(f"NÃºmero do ingresso: {numero_ingresso}")
+    print(f"Numero do ingresso: {numero_ingresso}")
 
 
 def listar_visitantes(visitantes):
@@ -159,22 +157,21 @@ def listar_visitantes(visitantes):
 
     if len(visitantes) == 0:
         print("Nenhum visitante cadastrado.")
-
         return
 
     for indice, visitante in enumerate(visitantes, start=1):
+
         idade = calcular_idade(
-            visitante["data_nascimento"]
+            visitante.data_nasc
         )
 
         print(f"\nVisitante {indice}")
-        print(f"Nome: {visitante['nome']}")
+        print(f"Nome: {visitante.nome}")
         print(f"Idade: {idade} anos")
         print(
             f"Tipo de ingresso: "
-            f"{visitante['tipo_ingresso']}"
+            f"{visitante.tipo_de_ingresso}"
         )
-
 def consultar_visitante(visitantes):
 
     print("\n" + "=" * 50)
@@ -186,40 +183,40 @@ def consultar_visitante(visitantes):
     )
 
     for visitante in visitantes:
-        if visitante["cpf"] == cpf:
+        if visitante.cpf == cpf:
 
             idade = calcular_idade(
-                visitante["data_nascimento"]
+                visitante.data_nasc
             )
 
             print("\nVisitante encontrado!")
 
             print("-" * 50)
 
-            print(f"Nome: {visitante['nome']}")
+            print(f"Nome: {visitante.nome}")
 
             print(
                 f"Data de nascimento: "
-                f"{visitante['data_nascimento']}"
+                f"{visitante.data_nasc}"
             )
 
             print(f"Idade: {idade} anos")
 
-            print(f"CPF: {visitante['cpf']}")
+            print(f"CPF: {visitante.cpf}")
 
             print(
                 f"Tipo de ingresso: "
-                f"{visitante['tipo_ingresso']}"
+                f"{visitante.tipo_de_ingresso}"
             )
 
             print(
                 f"Data da visita: "
-                f"{visitante['data_visita']}"
+                f"{visitante.data_da_visita}"
             )
 
             print(
-                f"NÃºmero do ingresso: "
-                f"{visitante['numero_ingresso']}"
+                f"Numero do ingresso: "
+                f"{visitante.numero_do_ingresso}"
             )
 
             print("-" * 50)
@@ -240,10 +237,10 @@ def remover_visitante(visitantes):
     )
 
     for visitante in visitantes:
-        if visitante["cpf"] == cpf:
+        if visitante.cpf == cpf:
             print(
                 f"\nVisitante encontrado: "
-                f"{visitante['nome']}"
+                f"{visitante.nome}"
             )
 
             confirmar = input(
@@ -261,7 +258,7 @@ def remover_visitante(visitantes):
             else:
 
                 print(
-                    "\nOperaÃ§Ã£o cancelada."
+                    "\nOperação cancelada."
                 )
 
             return
@@ -275,7 +272,7 @@ def main():
     while True:
 
         print("\n" + "=" * 60)
-        print("CENTRAL DE VISITANTES DO PARQUE")
+        print(" " * 13 + "CENTRAL DE VISITANTES DO PARQUE")
         print("=" * 60)
 
         print("1 - Cadastrar visitante")
@@ -286,7 +283,7 @@ def main():
 
         print("=" * 60)
         opcao = input(
-            "Escolha uma opÃ§Ã£o: "
+            "Escolha uma opção: "
         ).strip()
 
         if opcao == "1":
@@ -307,10 +304,9 @@ def main():
         else:
 
             print(
-                "\nOpÃ§Ã£o invÃ¡lida. "
+                "\nOpção invalida. "
                 "Tente novamente."
             )
 
 if __name__ == "__main__":
-
     main()
