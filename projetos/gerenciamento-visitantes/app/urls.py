@@ -5,5 +5,6 @@ from app import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('visitors/', views.visitors, name='visitors'),
-    path('visitors/create/', views.create_visitor, name='create_visitor')
+    path('visitors/create/', views.create_visitor, name='create_visitor'),
+    path('visitors/update/<int:id>/', views.update_visitor, name='update_visitor')
 ]

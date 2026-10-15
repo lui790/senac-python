@@ -34,3 +34,6 @@ def create_visitor(request):
         return redirect('visitors')
 
     return render(request, 'create-visitor.html')
+
+def update_visitor(request, id):
+    return render(request, 'update-visitor.html')
