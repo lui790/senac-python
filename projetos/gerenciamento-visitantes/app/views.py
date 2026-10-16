@@ -36,4 +36,21 @@ def create_visitor(request):
     return render(request, 'create-visitor.html')
 
 def update_visitor(request, id):
-    return render(request, 'update-visitor.html')
+    visitor = Visitor.objects.get(pk=id)
+    if request.method == 'POST':
+        visitor.first_name = request.POST['first_name']
+        visitor.last_name = request.POST['last_name']
+        visitor.cpf = request.POST['cpf']
+        visitor.birth_date = datetime.strptime(request.POST['birth_date'], '%Y-%m-%d')
+        visitor.ticket_date = datetime.strptime(request.POST['ticket_date'], '%Y-%m-%d')
+        visitor.ticket_type = request.POST['ticket_type']
+
+        visitor.save()
+
+        return redirect('visitors')
+
+    response = {
+        'visitor': visitor
+    }
+
+    return render(request, 'update-visitor.html', response)
