@@ -38,6 +38,8 @@
                     <td>{{ visitor.get_ticket_type_display }}</td>
                     <td>
                         <a href="./update/{{ visitor.id }}" class="btn btn-outline-primary btn-custom">Editar</a>
+                        <button class="btn btn-danger btn-custom" data-bs-toggle="modal" data-bs-target="#delete_modal"
+                         data-visitor-name="{{ visitor.first_name }} {{visitor.last_name}}" data-visitor-id="{{ visitor.id }}" >Deletar</button>
                     </td>
                 </tr>
                 {% endfor %}
@@ -46,5 +48,45 @@
             <a href="./create/" class="btn btn-outline-primary btn-custom">Novo visitante</a>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="delete_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Deletar visitante</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Tem certeza que deseja deletar o visitante <strong id="visitor_name">fulano</strong>?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <form id="delete_form" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Deletar permanentemente</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
+
+<script>
+    const deleteModal = document.getElementById("delete_modal")
+    const deleteForm = document.getElementById('delete_form')
+
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        const deleteButton = event.relatedTarget
+
+        const visitorName = deleteButton.getAttribute('data-visitor-name')
+        const visitorId = deleteButton.getAttribute('data-visitor-id')
+
+        document.getElementById('visitor_name').textContent = visitorName
+
+        deleteForm.action = `./delete/${visitorId}/`
+    })
+
+</script>
+
 </html>

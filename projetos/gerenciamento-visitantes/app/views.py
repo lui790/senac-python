@@ -54,3 +54,10 @@ def update_visitor(request, id):
     }
 
     return render(request, 'update-visitor.html', response)
+
+def delete_visitor(request, id):
+    visitor = Visitor.objects.get(pk=id)
+
+    visitor.delete()
+
+    return redirect('visitors')
