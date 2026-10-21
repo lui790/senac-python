@@ -10,10 +10,10 @@ button {
 
 estilizando pelo id
 #ticket_type {
-    width: 120px;
+    color: black;
 } */
 
-/* estilizando pela classe */
+/* estilizando pela classe  */
 .btn-custom {
     width: 130px;
 }

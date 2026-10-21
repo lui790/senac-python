@@ -14,7 +14,7 @@ def visitors(request):
     response = {
         'visitors': visitors
     }
-    
+
     return render(request, 'visitors.html', response)
 
 def create_visitor(request):
@@ -50,7 +50,7 @@ def update_visitor(request, id):
         return redirect('visitors')
 
     response = {
-        'visitor': visitor
+        'visitor': visitor    
     }
 
     return render(request, 'update-visitor.html', response)

@@ -1,33 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
+{% extends 'base.html' %}
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atualizar visitante</title>
+{% block title %}
+Atualizar visitante
+{% endblock %}
 
-    <link rel="stylesheet" href="{% static 'visitors/css/style.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-</head>
-<body>
-        <div class="container-fluid pt-5">
-        <h1>Atualizar visitante</h1>
+{% block content %}
+
+    <div class="container-fluid pt-5">
+        <h1>Atualizar visitante existente</h1>
         <p>Use o formulário abaixo para atualizar um visitante</p>
 
         <form action="./" method="post">
             {% csrf_token %}
-            
             <label for="first_name" class="form-label">Primeiro nome</label>
             <input type="text" class="form-control" id="first_name" name="first_name" value="{{ visitor.first_name }}">
-
+            
             <label for="last_name" class="form-label">Último nome</label>
             <input type="text" class="form-control" id="last_name" name="last_name" value="{{ visitor.last_name }}">
-
+            
             <label for="cpf" class="form-label">CPF</label>
             <input type="text" class="form-control" id="cpf" name="cpf" value="{{ visitor.cpf }}">
-
+            
             <label for="birth_date" class="form-label">Data de nascimento</label>
             <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{ visitor.birth_date|date:'Y-m-d' }}">
             
@@ -46,5 +39,4 @@
 
         <a href="../../" class="btn btn-outline-primary mt-3 btn-custom">Voltar</a>
     </div>
-</body>
-</html>
+{% endblock %}
