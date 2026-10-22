@@ -1,12 +1,24 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 Pagina inicial
 {% endblock %}
 
 {% block content %}
-<h1>Página inicial - Gerenciamento de visitantes</h1>
-<p>Bem vindo ao nosso site</p>
-
-<a href="visitors/">Clique aqui para ver a lista de visitantes</a>
-{% endblock %}
+<div class="d-flex">
+    <div class="col text-center">
+        <h3>Página inicial - Gerenciamento de visitantes</h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus cumque modi veniam veritatis delectus, iste error illum aperiam suscipit voluptates repudiandae in molestiae odio! Sed aspernatur possimus a error ipsum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati excepturi ad iure a porro hic dignissimos aliquid perspiciatis nesciunt impedit reiciendis aliquam ipsam, aperiam esse vel consequatur repudiandae consectetur exercitationem!</p>
+        
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio numquam fugit dolorem odit at velit provident molestias autem ut excepturi libero similique, minus delectus? Assumenda neque repudiandae ab eum maxime?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident inventore omnis iusto voluptatum in hic natus temporibus enim, est deserunt harum voluptatibus rem, dolorem quibusdam accusantium magnam sint eveniet id?</p>
+        
+        <a class="btn btn-outline-primary btn-custom" href="visitors/">Ver visitantes</a>
+    </div>
+    <div class="col d-flex justify-content-center">
+        <img src="{% static 'visitors/images/banner-home.png' %}" alt="" width="300px">
+    </div>
+</div>
+    {% endblock %}
+    

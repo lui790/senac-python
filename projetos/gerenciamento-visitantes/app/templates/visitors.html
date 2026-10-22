@@ -6,8 +6,34 @@ Visitantes
 
 {% block content %}
 <div>
-    <h1>Lista de visitantes</h1>
-    <p>Abaixo está a lista de visitantes do parque</p>
+    <div class="d-flex">
+        <div class="col">
+            <h1>Lista de visitantes</h1>
+            <p>Abaixo está a lista de visitantes do parque</p>
+        </div>
+        <div class="col">
+            <form action="" method="get">
+                <div class="d-flex gap-3 align-items-end">
+                    <div class="col">
+                        <label for="name_or_cpf" class="form-label">Buscar por nome ou Cpf</label>
+                        <input type="text" class="form-control" id="name_or_cpf" name="name_or_cpf">
+                    </div>
+
+                    <div class="col">
+                        <label for="ticket_type" class="form-label">Tipo de ingresso</label>
+                        <select name="ticket_type" id="ticket_type" class="form-select">
+                            <option value="">Todos</option>
+                            <option value="1">Normal</option>
+                            <option value="2">Vip</option>
+                            <option value="3">Premium</option>
+                        </select>
+                    </div>
+
+                    <input type="submit" value="Buscar" class="btn btn-primary btn-custom">
+                </div>
+            </form>
+        </div>
+    </div>
 
     <div class="table-responsive">
         <table class="table table-striped">

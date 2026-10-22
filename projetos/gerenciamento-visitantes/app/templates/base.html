@@ -17,9 +17,12 @@
 </head>
 <body>
     <header class="border-bottom border-white border-3">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'home' %}">Parque da Oktoberfest</a>
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="{% static 'visitors/images/logo.png' %}" alt="Logo Oktoberfest" width="50px">
+                    Parque da Oktoberfest
+                </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu_principal"
                     aria-controls="menu_principal" aria-expanded="false" aria-label="Alternar navegação">
@@ -50,7 +53,7 @@
         </nav>
     </header>
 
-    <main class="container-fluid pt-2">
+    <main class="container pt-2">
         {% block content %}
         {% endblock %}
     </main>
