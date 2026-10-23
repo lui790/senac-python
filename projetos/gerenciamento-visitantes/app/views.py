@@ -1,18 +1,37 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from datetime import datetime
 from uuid import uuid4
 
-from .models import Visitor
+from .models import Visitor, TicketType
 
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
 
 def visitors(request):
+    search = request.GET.get('name_or_cpf', '').strip()
+    ticket_type = request.GET.get('ticket_type', '0')
+
     visitors = Visitor.objects.all()
 
+    visitors = visitors.filter(
+        Q(first_name__icontains=search)
+        | Q(last_name__icontains=search)
+        | Q(cpf__contains=search)
+    )
+
+    valid_types = {str(value) for value in TicketType.values}
+
+    ticket_type_int = int(ticket_type)
+
+    if ticket_type in valid_types:
+        visitors = visitors.filter(ticket_type=ticket_type_int)
+
     response = {
-        'visitors': visitors
+        'visitors': visitors,
+        'search': search,
+        'ticket_type': ticket_type_int
     }
 
     return render(request, 'visitors.html', response)

@@ -16,16 +16,16 @@ Visitantes
                 <div class="d-flex gap-3 align-items-end">
                     <div class="col">
                         <label for="name_or_cpf" class="form-label">Buscar por nome ou Cpf</label>
-                        <input type="text" class="form-control" id="name_or_cpf" name="name_or_cpf">
+                        <input type="text" class="form-control" id="name_or_cpf" name="name_or_cpf" value="{{ search }}">
                     </div>
 
                     <div class="col">
                         <label for="ticket_type" class="form-label">Tipo de ingresso</label>
                         <select name="ticket_type" id="ticket_type" class="form-select">
-                            <option value="">Todos</option>
-                            <option value="1">Normal</option>
-                            <option value="2">Vip</option>
-                            <option value="3">Premium</option>
+                            <option value="0" {% if ticket_type == 0 %} selected {% endif %}>Todos</option>
+                            <option value="1" {% if ticket_type == 1 %} selected {% endif %}>Normal</option>
+                            <option value="2" {% if ticket_type == 2 %} selected {% endif %}>Vip</option>
+                            <option value="3" {% if ticket_type == 3 %} selected {% endif %}>Premium</option>
                         </select>
                     </div>
 
