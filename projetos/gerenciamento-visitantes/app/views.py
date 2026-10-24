@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render, redirect
-from datetime import datetime
+from datetime import datetime, date
 from uuid import uuid4
 
 from .models import Visitor, TicketType
@@ -76,7 +76,32 @@ def update_visitor(request, id):
 
 def delete_visitor(request, id):
     visitor = Visitor.objects.get(pk=id)
-
     visitor.delete()
 
     return redirect('visitors')
+
+def statistics(request):
+    visitors = Visitor.objects.all()
+    
+    quant = 0
+    quant_normal = 0
+    quant_vip = 0
+    quant_premium = 0
+    idade = 0
+
+    for object in Visitor.objects:
+        quant += 1
+
+    for object in Visitor.objects.filter(ticket_type = 1):
+        quant_normal += 1
+
+    for object in Visitor.objects.filter(ticket_type = 2):
+        quant_vip += 1
+
+    for object in Visitor.objects.filter(ticket_type = 3):
+        quant_premium += 1
+
+    for object in Visitor.objects:
+        s
+
+    return render(request, 'statistics.html')
