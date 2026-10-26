@@ -18,3 +18,8 @@ estilizando pelo id
     width: 130px;
     height: 40px;
 }
+
+.card-custom {
+    width:200px;
+    height:300px;
+}

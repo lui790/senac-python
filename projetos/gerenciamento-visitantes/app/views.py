@@ -81,7 +81,6 @@ def delete_visitor(request, id):
     return redirect('visitors')
 
 def statistics(request):
-    visitors = Visitor.objects.all()
     
     quant = 0
     quant_normal = 0
@@ -89,7 +88,7 @@ def statistics(request):
     quant_premium = 0
     idade = 0
 
-    for object in Visitor.objects:
+    for object in Visitor.objects.all():
         quant += 1
 
     for object in Visitor.objects.filter(ticket_type = 1):
@@ -101,7 +100,11 @@ def statistics(request):
     for object in Visitor.objects.filter(ticket_type = 3):
         quant_premium += 1
 
-    for object in Visitor.objects:
-        s
+    response = {
+        'quant': quant,
+        'quant_normal': quant_normal,
+        'quant_vip': quant_vip,
+        'quant_premium': quant_premium
+    }
 
-    return render(request, 'statistics.html')
+    return render(request, 'statistics.html', response)
