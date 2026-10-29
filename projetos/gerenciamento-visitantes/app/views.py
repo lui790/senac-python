@@ -2,6 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 from datetime import datetime, date
 from uuid import uuid4
+from validate_docbr import CPF
 
 from .models import Visitor, TicketType
 
@@ -37,6 +38,7 @@ def visitors(request):
     return render(request, 'visitors.html', response)
 
 def create_visitor(request):
+    cpf_validator = CPF()
     if request.method == 'POST':
         visitor = Visitor()
 
@@ -48,9 +50,21 @@ def create_visitor(request):
         visitor.ticket_type = request.POST['ticket_type']
         visitor.ticket_number = str(uuid4())
 
-        visitor.save()
+        for object in Visitor.objects.all():
+            if visitor.cpf == Visitor.cpf:
+                cpf_cloned = True
+            else:
+                cpf_cloned = False
 
-        return redirect('visitors')
+        if cpf_validator.validate(visitor.cpf) & cpf_cloned != True:
+            visitor.save()
+            return redirect('visitors')
+        else:
+            response = {
+                'has_error': True,
+                'error_message': 'O CPF inserido não é válido'
+            }
+            return render(request, 'create-visitor.html', response)
 
     return render(request, 'create-visitor.html')
 
@@ -81,7 +95,6 @@ def delete_visitor(request, id):
     return redirect('visitors')
 
 def statistics(request):
-    
     quant = 0
     quant_normal = 0
     quant_vip = 0
@@ -100,11 +113,26 @@ def statistics(request):
     for object in Visitor.objects.filter(ticket_type = 3):
         quant_premium += 1
 
+    hoje = date.today()
+    idades = []
+
+    for object in Visitor.objects.all():
+        idade = hoje.year - object.birth_date.year
+
+        if (hoje.month, hoje.day) < (object.birth_date.month, object.birth_date.day):
+            idade -= 1
+
+        idades.append(idade)
+
+    idade_media = sum(idades) / len(idades)
+
     response = {
         'quant': quant,
         'quant_normal': quant_normal,
         'quant_vip': quant_vip,
-        'quant_premium': quant_premium
+        'quant_premium': quant_premium,
+        'idade_media': idade_media
     }
+
 
     return render(request, 'statistics.html', response)

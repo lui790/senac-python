@@ -7,6 +7,11 @@ Adicionar visitante
 {% block content %}
 
 <div class="container-fluid pt-5">
+
+    {% if has_error == True %}
+    invalid_cpf
+    {% endif %}
+
     <h1>Criar novo visitante</h1>
     <p>Use o formulário abaixo para criar um novo visitante</p>
 
@@ -39,4 +44,27 @@ Adicionar visitante
 
     <a href="../" class="btn btn-outline-primary mt-3">Voltar</a>
 </div>
+
+<div class="modal fade" id="invalid_cpf" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">CPF invalido</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                O CPF inserido não existe
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Okay</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const invalid_cpf = document.getElementById("invalid_cpf")
+
+</script>
+
 {% endblock %}
