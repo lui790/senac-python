@@ -18,10 +18,10 @@ Adicionar visitante
     <form action="./" method="post">
         {% csrf_token %}
         <label for="first_name" class="form-label">Primeiro nome</label>
-        <input type="text" class="form-control" id="first_name" name="first_name">
+        <input required type="text" class="form-control" id="first_name" name="first_name">
         
         <label for="last_name" class="form-label">Último nome</label>
-        <input type="text" class="form-control" id="last_name" name="last_name">
+        <input required type="text" class="form-control" id="last_name" name="last_name">
         
         <label for="cpf" class="form-label">CPF</label>
         <input type="text" class="form-control" id="cpf" name="cpf">
