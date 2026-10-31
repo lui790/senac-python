@@ -4,6 +4,7 @@ from datetime import datetime, date
 from uuid import uuid4
 from validate_docbr import CPF
 
+from .forms.create_visitor_form import CreateVisitorForm
 from .models import Visitor, TicketType
 
 # Create your views here.
@@ -38,35 +39,23 @@ def visitors(request):
     return render(request, 'visitors.html', response)
 
 def create_visitor(request):
-    cpf_validator = CPF()
     if request.method == 'POST':
-        visitor = Visitor()
+        visitor_form = CreateVisitorForm(request.POST)
 
-        visitor.first_name = request.POST['first_name']
-        visitor.last_name = request.POST['last_name']
-        visitor.cpf = request.POST['cpf']
-        visitor.birth_date = datetime.strptime(request.POST['birth_date'], '%Y-%m-%d')
-        visitor.ticket_date = datetime.strptime(request.POST['ticket_date'], '%Y-%m-%d')
-        visitor.ticket_type = request.POST['ticket_type']
-        visitor.ticket_number = str(uuid4())
-
-        for object in Visitor.objects.all():
-            if visitor.cpf == Visitor.cpf:
-                cpf_cloned = True
-            else:
-                cpf_cloned = False
-
-        if cpf_validator.validate(visitor.cpf) & cpf_cloned != True:
+        if visitor_form.is_valid():
+            visitor = visitor_form.save(commit=False)
+            visitor.ticket_number = str(uuid4())
             visitor.save()
-            return redirect('visitors')
-        else:
-            response = {
-                'has_error': True,
-                'error_message': 'O CPF inserido não é válido'
-            }
-            return render(request, 'create-visitor.html', response)
 
-    return render(request, 'create-visitor.html')
+            return redirect('visitors')
+    else:
+        visitor_form = CreateVisitorForm()
+
+    response = {
+        'form': visitor_form
+    }
+
+    return render(request, 'create-visitor.html', response)
 
 def update_visitor(request, id):
     visitor = Visitor.objects.get(pk=id)
