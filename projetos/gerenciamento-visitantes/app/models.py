@@ -9,7 +9,9 @@ class Visitor(models.Model):
 
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    cpf = models.CharField(max_length=11)
+    cpf = models.CharField(max_length=11, unique=True, error_messages={
+        'unique': 'Já existe um visitante cadastrado com esse CPF.'
+    })
     birth_date = models.DateField()
     ticket_date = models.DateField()
     ticket_type = models.IntegerField(choices=TicketType.choices)
