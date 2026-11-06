@@ -5,6 +5,7 @@ from uuid import uuid4
 from validate_docbr import CPF
 
 from .forms.create_visitor_form import CreateVisitorForm
+from .forms.update_visitor_form import UpdateVisitorForm
 from .models import Visitor, TicketType
 
 # Create your views here.
@@ -60,19 +61,17 @@ def create_visitor(request):
 def update_visitor(request, id):
     visitor = Visitor.objects.get(pk=id)
     if request.method == 'POST':
-        visitor.first_name = request.POST['first_name']
-        visitor.last_name = request.POST['last_name']
-        visitor.cpf = request.POST['cpf']
-        visitor.birth_date = datetime.strptime(request.POST['birth_date'], '%Y-%m-%d')
-        visitor.ticket_date = datetime.strptime(request.POST['ticket_date'], '%Y-%m-%d')
-        visitor.ticket_type = request.POST['ticket_type']
+        visitor_form = UpdateVisitorForm(request.POST, instance=visitor)
 
-        visitor.save()
-
-        return redirect('visitors')
+        if visitor_form.is_valid():
+            visitor_form.save()
+            return redirect('visitors')
+    else:
+        visitor_form = UpdateVisitorForm(instance=visitor)
 
     response = {
-        'visitor': visitor    
+        'form': visitor_form,
+        'ticket_number': visitor.ticket_number
     }
 
     return render(request, 'update-visitor.html', response)
