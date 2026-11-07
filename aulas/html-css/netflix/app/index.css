@@ -1,0 +1,24 @@
+.header {
+    display: flex;
+    height: 70px;
+    justify-content: space-between  ;
+    /* background-color: #000000; */
+}
+
+.header-logo {
+    height: 70px;
+    width: 150px;
+}
+
+.header-user-icon {
+    width: 70px;
+    height: 70px;
+}
+
+.header-left-side {
+    float: left;
+}
+
+.header-right-side {
+    float: right;
+}
