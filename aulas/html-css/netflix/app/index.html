@@ -15,23 +15,55 @@
     <header class="header">
 
         <div class="header-left-side">
-            <img src="./images/logo.jpg" alt="Logo Netflix" class="header-logo">
+            <a href="#">
+                <img src="./images/logo.jpg" alt="Logo Netflix" class="header-logo">
+            </a>
 
-            <ul>
-                <li>Início</li>
-                <li>Séries</li>
-                <li>Filmes</li>
-                <li>Minha lista</li>
+            <ul class="header-left-menu">
+                <a href="#">
+                    <li class="header-left-menu-item">Início</li>
+                </a>
+
+                <a href="#">
+                    <li class="header-left-menu-item">Séries</li>
+                </a>
+
+                <a href="#">
+                    <li class="header-left-menu-item">Filmes</li>
+                </a>
+                
+                <a href="#">
+                    <li class="header-left-menu-item">Minha lista</li>
+                </a>
+                
             </ul>
         </div>
 
         <div class="header-right-side">
-            <i class="bi bi-search"></i>
-            <i class="bi bi-bell-fill"></i>
-            <img src="./images/user-icon.jpg" alt="Icone de usuario" class="header-user-icon">
-            <i class="bi bi-caret-down-fill"></i>
+            <button>
+                <i class="bi bi-search header-right-side-item"></i>
+            </button>
+
+            <button>
+                <i class="bi bi-bell-fill header-right-side-item"></i>
+            </button>
+            
+            <button class="header-user-icon-button">
+                <img src="./images/user-icon.jpg" alt="Icone de usuario" class="header-user-icon">
+                <i style="font-size: 8px; margin-left: 5px;" class="bi bi-caret-down-fill"></i>
+            </button>
         </div>
     </header>
+
+    <main class="container">
+        <section class="section-main-content">
+            <img src="./images/banner-home.png" alt="Banner principal" class="section-main-content-image">
+            <div class="section-main-content-buttons">
+                <button class="btn-primary btn"><i class="bi bi-play-fill"></i>Assistir</button>
+                <button class="btn-secondary btn"><i class="bi bi-plus-lg"></i>Minha lista</button>
+            </div>
+        </section>
+    </main>
 </body>
 
 </html>

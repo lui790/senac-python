@@ -1,24 +1,142 @@
+* {
+    color: #FFFFFF;
+}
+
+body {
+    margin: 0;
+    background-color: #000000;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
 .header {
     display: flex;
     height: 70px;
-    justify-content: space-between  ;
-    /* background-color: #000000; */
+    justify-content: space-between;
+    padding: 0 40px;
+
+    background-color: #000000;
 }
 
 .header-logo {
     height: 70px;
-    width: 150px;
+    width: 120px;
 }
 
 .header-user-icon {
-    width: 70px;
-    height: 70px;
+    width: 25px;
+    height: 25px;
 }
 
-.header-left-side {
-    float: left;
+.header-left-side { 
+    display: flex;
 }
+
+.header-left-menu {
+    display: flex;
+    list-style: none;
+}
+
+.header-left-menu-item {
+    padding: 10px;
+
+    font-weight: 700;
+}
+
+.header-right-side-item {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+
+    font-size: 20px;
+}
+
+.header-left-menu-item:hover {
+    border-bottom: 2px solid #F00210;
+}
+
+
 
 .header-right-side {
-    float: right;
+    display: flex;
+}
+
+.header-user-icon-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-primary {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.btn-secondary {
+    background: #2F2F30;
+    color: #FFFFFF;
+}
+
+.btn-primary:hover {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+.btn-primary:hover i {
+    color: #FFFFFF;
+}
+
+.btn-secondary:hover {
+    background: #FFFFFF;
+    color: #2F2F30;
+}
+
+.btn-secondary:hover i {
+    color: #2F2F30;
+}
+
+.bi-play-fill {
+    color: #000000;
+    margin-right: 5px;
+}
+
+.bi-plus-lg {
+    color: #FFFFFF;
+    margin-right: 5px;
+}
+
+.btn {
+    width: 110px;
+    height: 30px;
+    border-radius: 7px;
+    font-weight: 700;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-main-content-image {
+    width: 100%;
+}
+
+.section-main-content {
+    position: relative;
+}
+
+.section-main-content-buttons {
+    position: absolute;
+    top: 80%;
+    left: 0;
 }
