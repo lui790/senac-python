@@ -1,3 +1,26 @@
 a {
     text-decoration: none;
 }
+
+body {
+    margin: 0;
+    height: 100%;
+}
+
+.icons {
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.classe-div {
+    height: 100%;
+    display: flex;
+}
