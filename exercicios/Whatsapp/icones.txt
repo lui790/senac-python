@@ -1,0 +1,5 @@
+<i class="bi bi-chat-left-dots-fill"></i> (primeiro icone)
+<i class="bi bi-people"></i> (segundo icone)
+<i class="bi bi-circle"></i> <i class="bi bi-leaf-fill"></i> (terceiro icone [juntar])
+<i class="bi bi-telephone"></i> (quarto icone)
+<i class="bi bi-gear"></i> (quinto icone)
